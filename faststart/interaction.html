@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table {
+            width: 350px;
+        }
+
+        td {
+            border: 1px solid black;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+
+<div id="app">
+    <div v-if="!start">
+        <h3>welcome to vue world</h3>
+        <button @click="start = !start">let's start</button>
+    </div>
+    <div v-else>
+        <div v-if="products.length === 0">
+            正在获取数据，请稍后
+        </div>
+        <div v-else>
+            <p>店内商品管理</p>
+            <table>
+                <thead>
+                <tr>
+                    <td>商品</td>
+                    <td>数量</td>
+                </tr>
+                </thead>
+
+                <tbody v-for="product in products">
+                <tr>
+                    <td>{{product.name}}</td>
+                    <td>{{product.stock}} <button @click="product.stock+=1">入库</button></td>
+                </tr>
+                </tbody>
+            </table>
+            <p>共计{{totalStock}}件</p>
+        </div>
+
+    </div>
+</div>
+
+<script>
+  // 声明式渲染
+  var app = new Vue({
+    el: '#app',
+    data: {
+      products: [],
+      start: true
+    },
+    created () {
+      p1().then(res => {
+        this.products = res
+      })
+    },
+    computed: {
+      totalStock: function () {
+        console.log(this.products[0])
+        return this.products.reduce((count, i) => count + i.stock, 0)
+      }
+    }
+  })
+
+  function p1 () {
+    return new Promise(resolve => {
+      const products = [
+        {id: 0, stock: 23, name: 'Mouse'},
+        {id: 1, stock: 0, name: 'Mouse'},
+        {id: 0, stock: 50, name: 'Mouse'},
+      ]
+
+      setTimeout(() => {
+        resolve(products)
+      }, 500)
+    })
+  }
+</script>
+</body>
+</html>

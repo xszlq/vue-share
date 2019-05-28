@@ -30,14 +30,16 @@
             <table>
                 <thead>
                 <tr>
-                    <th>商品</th>
-                    <th>数量</th>
+                    <td>商品</td>
+                    <td>数量</td>
                 </tr>
                 </thead>
 
                 <tbody v-for="product in products">
-                <td>{{product.name}}</td>
-                <td>{{product.stock}}</td>
+                <tr>
+                    <td>{{product.name}}</td>
+                    <td>{{product.stock}}</td>
+                </tr>
                 </tbody>
             </table>
             <p>共计{{totalStock}}件</p>
