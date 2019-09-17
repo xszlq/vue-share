@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件注册</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<p>组件可以全局和局部注册，不过在使用vue-cli开发中使用比较少，这块先暂时不深入学习</p>
+<div id="app">
+    <my-component></my-component>
+</div>
+
+
+<script>
+  Vue.component('my-component', {
+    template: '<div>hello world</div>',
+    mounted(){
+      console.log('mounted ...')
+    }
+    // 选项
+  })
+
+  new Vue({ el: '#app' })
+</script>
+
+</body>
+</html>

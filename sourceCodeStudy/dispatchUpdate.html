@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>派发更新</title>
+</head>
+<body>
+<p>我们对Vue数据进行就改时，会触发setter，把在依赖过程中订阅的所有观察者，也就是watcher，都触发他们的update过程，
+    这个过程又利用了队列做进一步优化，在nextTick后执行所有watcher的run，最后执行他们的回调函数。</p>
+
+</body>
+</html>

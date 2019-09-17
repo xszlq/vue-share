@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>生命周期</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<p>在平时的开发中，经常与Vue的生命周期钩子函数打交道，但是这些钩子函数在内部是怎样执行的？</p>
+<p>beforeCreate & created DOM还未渲染，在这两个生命周期函数可以进行加载后端数据的操作</p>
+<p>beforeMount & mounted 分别在DOM渲染前后执行， 如果包含子组件则先执行子组件的mounted</p>
+<p>beforeUpdate & updated </p>
+<p>beforeDestroy & destroyed</p>
+<pre>
+  <code>
+    export function callHook (vm: Component, hook: string) {
+        // #7573 disable dep collection when invoking lifecycle hooks
+        pushTarget()
+        const handlers = vm.$options[hook]
+        if (handlers) {
+            for (let i = 0, j = handlers.length; i < j; i++) {
+                try {
+                    handlers[i].call(vm)
+                } catch (e) {
+                    handleError(e, vm, `${hook} hook`)
+                }
+            }
+        }
+        if (vm._hasHookEvent) {
+            vm.$emit('hook:' + hook)
+        }
+        popTarget()
+    }
+</code>
+</pre>
+
+
+<div id="app"></div>
+
+<script>
+  let app = new Vue({
+    el: '#app',
+    render: h => h(childComp),
+    created(){
+      console.log('ppp created')
+    }
+  })
+</script>
+
+</body>
+</html>

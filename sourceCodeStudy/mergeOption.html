@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>合并配置</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<p>这个demo控制台会输出什么？可以看到打印了两个'parent created' 然后再打印的'child created';</p>
+<p>因为我们mixin了一个created生命周期函数，在实例化的时候会合并配置，如果组件含有created方法，最终会合并成一个created的数组，然后在实例化的时候依次执行</p>
+<div id="app"></div>
+
+<script>
+  let childComp = {
+    template: '<div>{{msg}}</div>',
+    created() {
+      console.log('child created')
+    },
+    mounted() {
+      console.log('child mounted')
+    },
+    data() {
+      return {
+        msg: 'Hello Vue'
+      }
+    }
+  }
+
+  Vue.mixin({
+    created() {
+      console.log('parent created')
+    }
+  })
+
+  let app = new Vue({
+    el: '#app',
+    render: h => h(childComp),
+    created(){
+      console.log('ppp created')
+    }
+  })
+</script>
+
+</body>
+</html>

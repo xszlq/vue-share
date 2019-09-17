@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>响应式对象</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<p>很多面经都介绍过vue是基于Object.defineProperty方法来实现响应式的</p>
+<p>initState 在Vue初始化阶段_init方法会执行initState(vm)方法</p>
+<p>initState 方法主要是对 props、methods、data、computed 和 wathcer 等属性做了初始化操作</p>
+<p>响应式对象getter相关的逻辑就是做依赖收集，setter 做的事情是派发更新</p>
+<p>getter做依赖收集几个核心实现 Dep类 Watcher类</p>
+<p>Vue在做派发更新的时候不会每次数据改变都触发watcher的回调，而是把这些watcher先添加到一个队列里，然后在nextTick后执行flushSchedulerQueue</p>
+
+<script>
+
+</script>
+</body>
+</html>
